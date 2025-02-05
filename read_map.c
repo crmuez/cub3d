@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:10:52 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/05 14:32:31 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/05 20:45:57 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,14 @@ char	*clean_line(char *line)
 {
 	while (*line && *(line + 1))
 	{
-		if (line == "." && *(line + 1) == "/")
+		if (*line == '.' && *(line + 1) == '/')
 			return (line);
 		line++;
 	}
+	return (NULL);
 }
 
-void	read_file(char argv, t_map *game)
+void	read_file(char *argv, t_map *game)
 {
 	int		i;
 	int		fd;
@@ -62,11 +63,18 @@ void	read_file(char argv, t_map *game)
 	while (line)
 	{
 		game->file[i] = ft_strdup(line);
+		i++;
 		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
 	game->file[i] = NULL;
+	i = 0;
+		while (game->file)
+	{
+		printf("%s\n", game->file[i]);
+		i++;
+	}
 }
 /*
 	{
