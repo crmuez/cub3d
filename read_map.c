@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:10:52 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/06 17:08:56 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/06 20:35:44 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,28 +60,114 @@ void	read_file(char *argv, t_map *game)
 	game->file[i] = NULL;
 }
 
+char	*ft_cpytexture(char *src)
+{
+	int		i;
+	int		len;
+	char	*dst;
+
+	i = 0;
+	len = 3;
+	if (!src)
+		return (NULL);
+	while (src[len] && ft_isspace(src[len]))
+		len++;
+	i = len;
+	while (!ft_isspace(src[len]))
+		len++;
+	len = len - i;
+	dst = malloc(sizeof(char) * len + 1);
+	len = 0;
+	while (src[i] && (!ft_isspace(src[i])))
+	{
+		dst[len] = src[i];
+		len++;
+		i++;
+	}
+	dst[len] = '\0';
+	return (dst);
+}
+
+char	*ft_cpyrgb(char *src)
+{
+	int		i;
+	int		len;
+	char	*dst;
+
+	i = 0;
+	len = 2;
+	if (!src)
+		return (NULL);
+	while (src[len] && ft_isspace(src[len]))
+		len++;
+	i = len;
+	while (!ft_isspace(src[len]))
+		len++;
+	len = len - i;
+	dst = malloc(sizeof(char) * len + 1);
+	len = 0;
+	while (src[i] && (!ft_isspace(src[i])))
+	{
+		dst[len] = src[i];
+		len++;
+		i++;
+	}
+	dst[len] = '\0';
+	return (dst);
+}
+
+void	save_map(t_map *game, int i)
+{
+	int	n;
+	int	j;
+
+	n = ft_strlen(game->file[i]);
+	while (game->file[i])
+	{
+		if ((!ft_strncmp("1", game->file[i], n))
+			|| (!ft_strncmp("0", game->file[i], n)))
+			break ;
+		i++;
+	}
+	j = i;
+	while (game->file[i])
+		i++;
+	game->map = (char **)malloc(sizeof(char *) * ((i - j) + 1));
+	i = 0;
+	while (game->file[j])
+	{
+		game->map[i] = game->file[j];
+		i++;
+		j++;
+	}
+	game->map[i] = NULL;
+}
+
 void	save_texture(t_map *game)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
 	while (game->file[i])
 	{
-		write (1, "no peto aqui 3\n", 15);
-		//while (ft_isspace(game->file[i][j]))
-		//	j++;
-		if (ft_strncmp("NO ", game->file[i], 3))
-			game->no_texture = ft_strncpy(game->file[i]);
-		else if (ft_strncmp("SO ", game->file[i], 3))
-			game->so_texture = ft_strncpy(game->file[i]);
-		else if (ft_strncmp("WE ", game->file[i], 3))
-			game->we_texture = ft_strncpy(game->file[i]);
-		else if (ft_strncmp("EA ", game->file[i], 3))
-			game->ea_texture = ft_strncpy(game->file[i]);
+		if (!ft_strncmp("NO ", game->file[i], 3))
+			game->no_texture = ft_cpytexture(game->file[i]);
+		else if (!ft_strncmp("SO ", game->file[i], 3))
+			game->so_texture = ft_cpytexture(game->file[i]);
+		else if (!ft_strncmp("WE ", game->file[i], 3))
+			game->we_texture = ft_cpytexture(game->file[i]);
+		else if (!ft_strncmp("EA ", game->file[i], 3))
+			game->ea_texture = ft_cpytexture(game->file[i]);
+		else if (!ft_strncmp("F ", game->file[i], 2))
+			game->floor = ft_cpyrgb(game->file[i]);
+		else if (!ft_strncmp("C ", game->file[i], 2))
+			game->ceiling = ft_cpyrgb(game->file[i]);
+		if (game->no_texture && game->so_texture && game->ea_texture
+			&& game->we_texture && game->ceiling && game->floor)
+			break ;
 		i++;
 	}
+	save_map(game, i);
 }
 
 /*

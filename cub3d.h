@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:11:24 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/06 17:01:17 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/06 19:05:25 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_map
 	char		*so_texture;
 	char		*we_texture;
 	char		*ea_texture;
+	char		*floor;
+	char		*ceiling;
 	mlx_t		*mlx;
 }			t_map;
 
@@ -56,10 +58,11 @@ void	read_file(char *argv, t_map *game);
 /* READ_MAP */
 void	save_texture(t_map *game);
 void	read_file(char *argv, t_map *game);
+char	*ft_cpytexture(char *src);
+char	*ft_cpyrgb(char *src);
 
 /* FREES */
 int		ft_error(int err);
 void	free_map(char **map);
-char	*ft_strncpy(char *src);
 
 #endif
