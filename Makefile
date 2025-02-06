@@ -6,17 +6,17 @@
 #    By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 14:49:39 by crmunoz-          #+#    #+#              #
-#    Updated: 2025/02/05 20:36:59 by crmunoz-         ###   ########.fr        #
+#    Updated: 2025/02/06 17:25:01 by crmunoz-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= cub3d
-CFLAGS	:= -Wextra -Wall -Werror
+CFLAGS	:= -g -Wextra -Wall -Werror
 MLX_DIR	= ./MLX42
 MLX	:= $(MLX_DIR)/libmlx42.a
 HEADERS	:= -I$(MLX)
-MLX_FLAGS	:= -ldl -pthread -lm
-SRCS	:= cub3d.c utils/get_next_line.c utils/get_next_line_utils.c utils/frees.c read_map.c
+MLX_FLAGS	:= -g -ldl -pthread -lm
+SRCS	:= cub3d.c read_map.c utils/get_next_line.c utils/get_next_line_utils.c utils/frees.c 
 OBJS	:= ${SRCS:.c=.o}
 CC	:= clang
 all: $(NAME)

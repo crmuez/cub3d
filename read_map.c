@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:10:52 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/05 20:45:57 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:08:56 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,6 @@ int	count_lines(char *argv)
 	}
 	close(fd);
 	return (i);
-}
-
-char	*clean_line(char *line)
-{
-	while (*line && *(line + 1))
-	{
-		if (*line == '.' && *(line + 1) == '/')
-			return (line);
-		line++;
-	}
-	return (NULL);
 }
 
 void	read_file(char *argv, t_map *game)
@@ -69,29 +58,33 @@ void	read_file(char *argv, t_map *game)
 	}
 	close(fd);
 	game->file[i] = NULL;
+}
+
+void	save_texture(t_map *game)
+{
+	int	i;
+	int	j;
+
 	i = 0;
-		while (game->file)
+	j = 0;
+	while (game->file[i])
 	{
-		printf("%s\n", game->file[i]);
+		write (1, "no peto aqui 3\n", 15);
+		//while (ft_isspace(game->file[i][j]))
+		//	j++;
+		if (ft_strncmp("NO ", game->file[i], 3))
+			game->no_texture = ft_strncpy(game->file[i]);
+		else if (ft_strncmp("SO ", game->file[i], 3))
+			game->so_texture = ft_strncpy(game->file[i]);
+		else if (ft_strncmp("WE ", game->file[i], 3))
+			game->we_texture = ft_strncpy(game->file[i]);
+		else if (ft_strncmp("EA ", game->file[i], 3))
+			game->ea_texture = ft_strncpy(game->file[i]);
 		i++;
 	}
 }
+
 /*
-	{
-		while (ft_isspace(*line))
-			line++;
-		if (ft_strncmp("NO ", line, 3));
-			game->no_texture = clean_line(&line);
-		else if (ft_strncmp("SO ", line, 3));
-			game->so_texture = clean_line(&line);
-		else if (ft_strncmp("WE ", line, 3));
-			game->we_texture = clean_line(&line);
-		else if (ft_strncmp("EA ", line, 3));
-			game->ea_texture = clean_line(&line);
-		line = get_next_line(fd);
-	}
-
-
 void	check_texture(t_map *game)
 {
 	int	i;
@@ -119,7 +112,9 @@ void	check_texture(t_map *game)
 		j = 0;
 		i++;
 	}
-}*/
+}
+*/
+
 /* 	PARA COMPROBAR QUE LA PRIMERA FILA Y LA ÚLTIMA SEAN 1's
 		if (game->map[0][0] != '1'
 			|| game->map[0][(ft_strlen(game->map)) - 1] != '1')
@@ -129,3 +124,15 @@ void	check_texture(t_map *game)
 			return (-1);
 		}
 */
+
+/*
+char	*clean_line(char *line)
+{
+	while (*line && *(line + 1))
+	{
+		if (*line == '.' && *(line + 1) == '/')
+			return (line);
+		line++;
+	}
+	return (NULL);
+}*/

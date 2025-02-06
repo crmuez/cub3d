@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:11:24 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/05 20:29:07 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:01:17 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,13 @@ char	*ft_strjoin(char *s1, char *s2);
 /* CUB3D */
 void	read_file(char *argv, t_map *game);
 
+/* READ_MAP */
+void	save_texture(t_map *game);
+void	read_file(char *argv, t_map *game);
+
 /* FREES */
 int		ft_error(int err);
 void	free_map(char **map);
+char	*ft_strncpy(char *src);
 
 #endif
