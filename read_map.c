@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:10:52 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/06 20:35:44 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:32:30 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,14 +118,12 @@ char	*ft_cpyrgb(char *src)
 
 void	save_map(t_map *game, int i)
 {
-	int	n;
 	int	j;
 
-	n = ft_strlen(game->file[i]);
 	while (game->file[i])
 	{
-		if ((!ft_strncmp("1", game->file[i], n))
-			|| (!ft_strncmp("0", game->file[i], n)))
+		if ((ft_strchr(game->file[i], '1') >= 0)
+			|| (ft_strchr(game->file[i], '0') >= 0))
 			break ;
 		i++;
 	}
@@ -136,7 +134,7 @@ void	save_map(t_map *game, int i)
 	i = 0;
 	while (game->file[j])
 	{
-		game->map[i] = game->file[j];
+		game->map[i] = ft_strdup(game->file[j]);
 		i++;
 		j++;
 	}
@@ -167,7 +165,7 @@ void	save_texture(t_map *game)
 			break ;
 		i++;
 	}
-	save_map(game, i);
+	save_map(game, (i + 1));
 }
 
 /*

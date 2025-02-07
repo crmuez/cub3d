@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:11:35 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/06 19:08:22 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:30:26 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ int	ft_error(int err)
 	if (err == '0')
 	{
 		printf("Invalid arguments\n");
-		return (1);
+		return (-1);
 	}
 	else if (err == '1')
 	{
 		printf("Malloc error\n");
-		return (1);
+		return (-1);
 	}
 	return (0);
 }
