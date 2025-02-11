@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:33:36 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/07 16:29:12 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:10:37 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,25 @@ int	main(int argc, char **argv)
 	t_map	*game;
 
 	if (argc != 2)
-		return (ft_error(0));
+		return (ft_error('0'));
 	game = malloc(sizeof(t_map));
 	if (!game)
-		ft_error(1);
+		return (ft_error('1'));
 	init_null(game);
 	read_file(argv[1], game);
 	save_texture(game);
+	if (check_error(*argv, game) < 0)
+		return (0);
 	/*printf("EA: %s\n", game->ea_texture);
 	printf("WE: %s\n", game->we_texture);
 	printf("NO: %s\n", game->no_texture);
 	printf("SO: %s\n", game->so_texture);
 	printf("Floor: %s\n", game->floor);
-	printf("Ceiling: %s\n", game->ceiling);*/
+	printf("Ceiling: %s\n", game->ceiling);
 	int i = 0;
 	while (game->map[i])
 	{
 		printf("%s\n", game->map[i]);
 		i++;
-	}
+	}*/
 }

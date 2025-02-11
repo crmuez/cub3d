@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:11:35 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/07 16:30:26 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:05:30 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,17 @@ int	ft_error(int err)
 {
 	if (err == '0')
 	{
-		printf("Invalid arguments\n");
+		write(2, "Invalid arguments\n", 18);
 		return (-1);
 	}
 	else if (err == '1')
 	{
-		printf("Malloc error\n");
+		write(2, "Malloc error\n", 13);
+		return (-1);
+	}
+	else if (err == '2')
+	{
+		write(2, "Invalid map\n", 12);
 		return (-1);
 	}
 	return (0);
@@ -62,4 +67,25 @@ int	ft_strncmp(char *s1, char *s2, size_t n)
 		n--;
 	}
 	return ((unsigned char)(*s1) - (unsigned char)(*s2));
+}
+
+int	count_lines(char *argv)
+{
+	int		i;
+	int		fd;
+	char	*map;
+
+	fd = open(argv, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	map = get_next_line(fd);
+	i = 0;
+	while (map)
+	{
+		free(map);
+		i++;
+		map = get_next_line(fd);
+	}
+	close(fd);
+	return (i);
 }

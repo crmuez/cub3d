@@ -6,32 +6,11 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:10:52 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/07 16:32:30 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:12:11 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	count_lines(char *argv)
-{
-	int		i;
-	int		fd;
-	char	*map;
-
-	fd = open(argv, O_RDONLY);
-	if (fd < 0)
-		return (0);
-	map = get_next_line(fd);
-	i = 0;
-	while (map)
-	{
-		free(map);
-		i++;
-		map = get_next_line(fd);
-	}
-	close(fd);
-	return (i);
-}
 
 void	read_file(char *argv, t_map *game)
 {
@@ -122,8 +101,7 @@ void	save_map(t_map *game, int i)
 
 	while (game->file[i])
 	{
-		if ((ft_strchr(game->file[i], '1') >= 0)
-			|| (ft_strchr(game->file[i], '0') >= 0))
+		if (ft_strchr(game->file[i], '1') >= 0)
 			break ;
 		i++;
 	}
@@ -134,11 +112,16 @@ void	save_map(t_map *game, int i)
 	i = 0;
 	while (game->file[j])
 	{
-		game->map[i] = ft_strdup(game->file[j]);
+		if (ft_strchr(game->file[j], '1') >= 0)
+			game->map[i] = ft_strdup(game->file[j]);
+		else
+			break ;
 		i++;
 		j++;
 	}
 	game->map[i] = NULL;
+	if (game->map[0] == NULL)
+		ft_error('2');
 }
 
 void	save_texture(t_map *game)
