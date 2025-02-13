@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:11:24 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/13 14:46:57 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:23:59 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_map
 	char		**file;
 	char		**map;
 	int			maxlen_map;
+	int			maxlin_map;
 	char		*no_texture;
 	char		*so_texture;
 	char		*we_texture;

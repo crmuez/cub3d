@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:10:52 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/13 14:48:01 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:29:09 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,20 +121,15 @@ int	begin_map(t_map *game, int i)
 void	save_map(t_map *game, int i)
 {
 	int	j;
-	int	f;
 
 	j = begin_map(game, i);
 	while (game->file[i])
 		i++;
-	f = i - j;
-	game->map = (char **)malloc(sizeof(char *) * (f + 1));
+	game->maxlin_map = i - j;
+	game->map = (char **)malloc(sizeof(char *) * (game->maxlin_map + 1));
 	i = 0;
 	while (game->file[j])
 	{
-		/*if (i == 0)
-			game->map[i] = fillspace(game->maxlen_map);
-		if ((f - 1) == i)
-			game->map[i] = fillspace(game->maxlen_map);*/
 		if (ft_strchr(game->file[j], '1') >= 0)
 			game->map[i] = ft_dupspace(game->file[j], game->maxlen_map);
 		else

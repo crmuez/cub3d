@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:33:36 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/13 15:09:37 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:17:52 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 	init_null(game);
 	read_file(argv[1], game);
 	save_texture(game);
-	printf("%i", (check_error(*argv, game) < '0'));
+	if (check_error(*argv, game) < 0)
 		return (0);
 	/*printf("EA: %s\n", game->ea_texture);
 	printf("WE: %s\n", game->we_texture);
