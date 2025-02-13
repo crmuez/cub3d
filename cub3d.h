@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:11:24 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/10 19:16:42 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/13 14:46:57 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_map
 {
 	char		**file;
 	char		**map;
+	int			maxlen_map;
 	char		*no_texture;
 	char		*so_texture;
 	char		*we_texture;
@@ -54,6 +55,8 @@ char	*ft_strjoin(char *s1, char *s2);
 int		ft_error(int err);
 void	free_map(char **map);
 int		count_lines(char *argv);
+char	*fillspace(int len);
+char	*ft_dupspace(char *s1, int len);
 
 /* CUB3D */
 void	read_file(char *argv, t_map *game);

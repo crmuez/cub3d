@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:10:52 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/11 15:12:11 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/13 14:48:01 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,9 @@ char	*ft_cpyrgb(char *src)
 	return (dst);
 }
 
-void	save_map(t_map *game, int i)
+int	begin_map(t_map *game, int i)
 {
+	int	len_max;
 	int	j;
 
 	while (game->file[i])
@@ -106,14 +107,36 @@ void	save_map(t_map *game, int i)
 		i++;
 	}
 	j = i;
+	len_max = ft_strlen(game->file[i]);
+	while (game->file[i])
+	{
+		if (ft_strlen(game->file[i]) > len_max)
+			len_max = ft_strlen(game->file[i]);
+		i++;
+	}
+	game->maxlen_map = len_max;
+	return (j);
+}
+
+void	save_map(t_map *game, int i)
+{
+	int	j;
+	int	f;
+
+	j = begin_map(game, i);
 	while (game->file[i])
 		i++;
-	game->map = (char **)malloc(sizeof(char *) * ((i - j) + 1));
+	f = i - j;
+	game->map = (char **)malloc(sizeof(char *) * (f + 1));
 	i = 0;
 	while (game->file[j])
 	{
+		/*if (i == 0)
+			game->map[i] = fillspace(game->maxlen_map);
+		if ((f - 1) == i)
+			game->map[i] = fillspace(game->maxlen_map);*/
 		if (ft_strchr(game->file[j], '1') >= 0)
-			game->map[i] = ft_strdup(game->file[j]);
+			game->map[i] = ft_dupspace(game->file[j], game->maxlen_map);
 		else
 			break ;
 		i++;

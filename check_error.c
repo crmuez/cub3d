@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:03:35 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/11 15:26:31 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/13 14:55:49 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,41 @@ int	check_letters(t_map *game)
 	return (1);
 }
 
+int	check_valid_map(t_map *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (game->map[j])
+	{
+		while (game->map[j][i] != '\n')
+		{
+			if (game->map[j][i] == '0' || game->map[j][i] == 'W'
+				|| game->map[j][i] == 'N' || game->map[j][i] == 'E'
+				|| game->map[j][i] == 'S')
+			{
+				if (j == 0 || j == game->maxlen_map)
+					return (ft_error('2'));
+				else if ((ft_isspace(game->map[j + 1][i]))
+					|| (ft_isspace(game->map[j - 1][i]))
+					|| (ft_isspace(game->map[j][i + 1]))
+					|| (ft_isspace(game->map[j][i - 1])))
+					return (ft_error('2'));
+			}
+			i++;
+		}
+		i = 0;
+		j++;
+	}
+	return (1);
+}
+
 int	check_error(char *argv, t_map *game)
 {
-	if (game->map && check_cub(argv) && check_letters(game))
+	if (game->map && check_cub(argv) && check_letters(game)
+		&& check_valid_map(game))
 		return (1);
 	else
 		return (-1);
