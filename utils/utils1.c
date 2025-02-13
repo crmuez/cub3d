@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   frees.c                                            :+:      :+:    :+:   */
+/*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:11:35 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/11 16:37:48 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/13 18:50:01 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,14 @@ void	free_map(char **map)
 int	ft_error(int err)
 {
 	if (err == '0')
-	{
-		write(2, "Invalid arguments\n", 18);
-		return (-1);
-	}
+		write(2, "Error\nInvalid arguments\n", 24);
 	else if (err == '1')
-	{
-		write(2, "Malloc error\n", 13);
-		return (-1);
-	}
+		write(2, "Error\nMalloc error\n", 19);
 	else if (err == '2')
-	{
-		write(2, "Invalid map\n", 12);
-		return (-1);
-	}
-	return (0);
+		write(2, "Error\nInvalid map\n", 18);
+	else if (err == '3')
+		write(2, "Error\nInvalid map extension\n", 28);
+	return (-1);
 }
 
 int	ft_isspace(int c)

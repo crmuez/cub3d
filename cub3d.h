@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:11:24 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/13 15:23:59 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/13 18:51:58 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char	*ft_strjoin(char *s1, char *s2);
 int		ft_error(int err);
 void	free_map(char **map);
 int		count_lines(char *argv);
+char	*ft_strrchr(char *s, int c);
 char	*fillspace(int len);
 char	*ft_dupspace(char *s1, int len);
 

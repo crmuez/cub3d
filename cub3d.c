@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:33:36 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/13 15:17:52 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/13 19:08:32 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (ft_error('0'));
+	if (ft_strncmp(ft_strrchr(argv[1], '.'), ".cub", 4) != 0)
+		return (ft_error('3'));
 	game = malloc(sizeof(t_map));
 	if (!game)
 		return (ft_error('1'));
@@ -48,5 +50,5 @@ int	main(int argc, char **argv)
 		printf("%s", game->map[i]);
 		i++;
 	}*/
-printf("maparavilloso\n");
+//printf("maparavilloso\n");
 }

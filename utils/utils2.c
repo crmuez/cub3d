@@ -6,11 +6,31 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 18:03:20 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/13 14:46:46 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/13 18:51:35 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+char	*ft_strrchr(char *s, int c)
+{
+	int				i;
+	unsigned char	c2;
+	char			*s2;
+
+	s2 = (char *) s;
+	c2 = (unsigned char) c;
+	i = 0;
+	while (s2[i] != '\0')
+		i++;
+	while (i >= 0)
+	{
+		if (s2[i] == c2)
+			return (&s2[i]);
+		i--;
+	}
+	return (NULL);
+}
 
 char	*fillspace(int len)
 {

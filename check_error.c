@@ -6,27 +6,11 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:03:35 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/13 15:44:36 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/13 19:06:17 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	check_cub(char *argv)
-{
-	int		i;
-	char	*cub;
-
-	cub = ".cub";
-	i = ft_strlen(argv) - 4;
-	if (i < 4)
-		return (-1);
-	if (ft_strncmp(&argv[i], cub, 4) == 0)
-		return (1);
-	else
-		ft_error('2');
-	return (-1);
-}
 
 int	check_letters(t_map *game)
 {
@@ -88,7 +72,8 @@ int	check_valid_map(t_map *game)
 
 int	check_error(char *argv, t_map *game)
 {
-	if (game->map && check_cub(argv) && check_letters(game) && check_valid_map(game))
+	if (game->map && (check_letters(game) > 0)
+		&& (check_valid_map(game) > 0))
 		return (1);
 	else
 		return (-1);
