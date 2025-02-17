@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:03:35 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/13 19:06:17 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/14 16:53:36 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,11 @@ int	check_error(char *argv, t_map *game)
 {
 	if (game->map && (check_letters(game) > 0)
 		&& (check_valid_map(game) > 0))
+	{
+		save_rgb(game->ceiling, game->rgb_ceiling);
+		save_rgb(game->floor, game->rgb_floor);
 		return (1);
+	}
 	else
 		return (-1);
 }

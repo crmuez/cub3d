@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:10:52 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/13 15:29:09 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/14 11:35:19 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,33 +140,6 @@ void	save_map(t_map *game, int i)
 	game->map[i] = NULL;
 	if (game->map[0] == NULL)
 		ft_error('2');
-}
-
-void	save_texture(t_map *game)
-{
-	int	i;
-
-	i = 0;
-	while (game->file[i])
-	{
-		if (!ft_strncmp("NO ", game->file[i], 3))
-			game->no_texture = ft_cpytexture(game->file[i]);
-		else if (!ft_strncmp("SO ", game->file[i], 3))
-			game->so_texture = ft_cpytexture(game->file[i]);
-		else if (!ft_strncmp("WE ", game->file[i], 3))
-			game->we_texture = ft_cpytexture(game->file[i]);
-		else if (!ft_strncmp("EA ", game->file[i], 3))
-			game->ea_texture = ft_cpytexture(game->file[i]);
-		else if (!ft_strncmp("F ", game->file[i], 2))
-			game->floor = ft_cpyrgb(game->file[i]);
-		else if (!ft_strncmp("C ", game->file[i], 2))
-			game->ceiling = ft_cpyrgb(game->file[i]);
-		if (game->no_texture && game->so_texture && game->ea_texture
-			&& game->we_texture && game->ceiling && game->floor)
-			break ;
-		i++;
-	}
-	save_map(game, (i + 1));
 }
 
 /*

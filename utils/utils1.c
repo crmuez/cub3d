@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:11:35 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/13 18:50:01 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/14 15:46:25 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	ft_error(int err)
 		write(2, "Error\nInvalid map\n", 18);
 	else if (err == '3')
 		write(2, "Error\nInvalid map extension\n", 28);
+	else if (err == '4')
+		write(2, "Error\nInvalid rgb\n", 18);
 	return (-1);
 }
 

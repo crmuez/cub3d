@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 18:03:20 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/13 18:51:35 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:50:30 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,30 @@ char	*ft_dupspace(char *s1, int len)
 	dest[i] = '\n';
 	dest[++i] = '\0';
 	return (dest);
+}
+
+long	ft_atol(char *str)
+{
+	int		i;
+	long	sign;
+	long	n;
+
+	i = 0;
+	sign = 1;
+	n = 0;
+	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
+		|| str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			sign = sign * -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		n = ((n * 10) + (str[i] - '0'));
+		i++;
+	}
+	return (n * sign);
 }

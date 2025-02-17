@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:11:24 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/13 18:51:58 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/14 16:15:42 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #  define BUFFER_SIZE 1
 
 # endif
+
+# define WIDTH	1024
+# define HEIGHT	768
 
 # include "./MLX42/include/MLX42/MLX42.h"
 # include <errno.h>
@@ -36,14 +39,16 @@ typedef struct s_map
 	char		**map;
 	int			maxlen_map;
 	int			maxlin_map;
-	char		*no_texture;
-	char		*so_texture;
-	char		*we_texture;
-	char		*ea_texture;
+	char		*no_tx;
+	char		*so_tx;
+	char		*we_tx;
+	char		*ea_tx;
 	char		*floor;
+	long		rgb_floor[3];
 	char		*ceiling;
+	long		rgb_ceiling[3];
 	mlx_t		*mlx;
-}			t_map;
+}				t_map;
 
 /* UTILS */
 int		ft_isspace(int c);
@@ -59,15 +64,22 @@ int		count_lines(char *argv);
 char	*ft_strrchr(char *s, int c);
 char	*fillspace(int len);
 char	*ft_dupspace(char *s1, int len);
+long	ft_atol(char *str);
+char	**ft_split(char *s, char c);
 
 /* CUB3D */
 void	read_file(char *argv, t_map *game);
 
 /* READ_MAP */
-void	save_texture(t_map *game);
 void	read_file(char *argv, t_map *game);
 char	*ft_cpytexture(char *src);
 char	*ft_cpyrgb(char *src);
+int		begin_map(t_map *game, int i);
+void	save_map(t_map *game, int i);
+
+/* SAVE TEXTURES */
+void	save_texture(t_map *game);
+int		save_rgb(char *colors, long *rgb);
 
 /* CHECK_ERROR */
 int		check_error(char *argv, t_map *game);

@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:33:36 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/13 19:08:32 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/17 18:18:01 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 void	init_null(t_map (*game))
 {
+	game->file = NULL;
 	game->mlx = NULL;
 	game->map = NULL;
-	game->no_texture = NULL;
-	game->so_texture = NULL;
-	game->ea_texture = NULL;
-	game->we_texture = NULL;
+	game->no_tx = NULL;
+	game->so_tx = NULL;
+	game->ea_tx = NULL;
+	game->we_tx = NULL;
+	game->floor = NULL;
+	game->ceiling = NULL;
 }
 
 int	main(int argc, char **argv)
@@ -36,19 +39,28 @@ int	main(int argc, char **argv)
 	init_null(game);
 	read_file(argv[1], game);
 	save_texture(game);
-	if (check_error(*argv, game) < 0)
-		return (0);
-	/*printf("EA: %s\n", game->ea_texture);
-	printf("WE: %s\n", game->we_texture);
-	printf("NO: %s\n", game->no_texture);
-	printf("SO: %s\n", game->so_texture);
-	printf("Floor: %s\n", game->floor);
-	printf("Ceiling: %s\n", game->ceiling);
-	int i = 0;
-	while (game->map[i])
+	if (check_error(*argv, game) > 0)
 	{
-		printf("%s", game->map[i]);
-		i++;
-	}*/
-//printf("maparavilloso\n");
+		game->mlx = mlx_init(HEIGHT, WIDTH, "Cub3D", true);
+		//mlx_key_hook(game->mlx, &my_keyhook, game);
+		//mlx_loop(game->mlx);
+		//mlx_terminate(game->mlx);
+	}
+	return (0);
 }
+//print_map(game);
+/*
+printf("EA: %s\n", game->ea_tx);
+printf("WE: %s\n", game->we_tx);
+printf("NO: %s\n", game->no_tx);
+printf("SO: %s\n", game->so_tx);
+printf("Floor: r%lig%lib%li\n", game->rgb_floor[0], game->rgb_floor[1], game->rgb_floor[2]);
+printf("Ceiling:r%lig%lib%li\n", game->rgb_ceiling[0], game->rgb_ceiling[1], game->rgb_ceiling[2]);
+int i = 0;
+while (game->map[i])
+{
+	printf("%s", game->map[i]);
+	i++;
+}
+
+*/
