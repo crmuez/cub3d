@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:10:52 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/14 11:35:19 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:54:35 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,10 +130,7 @@ void	save_map(t_map *game, int i)
 	i = 0;
 	while (game->file[j])
 	{
-		if (ft_strchr(game->file[j], '1') >= 0)
-			game->map[i] = ft_dupspace(game->file[j], game->maxlen_map);
-		else
-			break ;
+		game->map[i] = ft_dupspace(game->file[j], game->maxlen_map);
 		i++;
 		j++;
 	}

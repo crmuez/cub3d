@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 18:03:20 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/14 12:50:30 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/18 16:30:50 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,12 @@ char	*ft_strrchr(char *s, int c)
 	}
 	return (NULL);
 }
-
-char	*fillspace(int len)
+/*
+char	*fillspace(int len) -> ya no lo uso
 {
 	int		i;
 	char	*dest;
 
-	printf("entro\n");
 	i = 0;
 	dest = malloc(sizeof(char) * (len + 1));
 	if (dest == NULL)
@@ -50,7 +49,7 @@ char	*fillspace(int len)
 	dest[i++] = '\n';
 	dest[i] = '\0';
 	return (dest);
-}
+}*/
 
 char	*ft_dupspace(char *s1, int len)
 {
