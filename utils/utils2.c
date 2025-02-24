@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 18:03:20 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/18 16:30:50 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/19 19:45:59 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,6 @@ char	*ft_strrchr(char *s, int c)
 	}
 	return (NULL);
 }
-/*
-char	*fillspace(int len) -> ya no lo uso
-{
-	int		i;
-	char	*dest;
-
-	i = 0;
-	dest = malloc(sizeof(char) * (len + 1));
-	if (dest == NULL)
-		return (0);
-	while (i < (len - 1))
-	{
-		dest[i] = ' ';
-		i++;
-	}
-	dest[i++] = '\n';
-	dest[i] = '\0';
-	return (dest);
-}*/
 
 char	*ft_dupspace(char *s1, int len)
 {
@@ -98,4 +79,16 @@ long	ft_atol(char *str)
 		i++;
 	}
 	return (n * sign);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		((char *)s)[i] = '\0';
+		i++;
+	}
 }

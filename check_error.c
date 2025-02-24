@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:03:35 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/18 18:38:30 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:56:12 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	check_character(int *character, char c)
 			*character = 2;
 		else if (*character == 0)
 			*character = 1;
+		if (*character == 2)
+			return (ft_error('2'));
 	}
-	if (*character == 2)
-		return (ft_error('2'));
 	return (1);
 }
 
@@ -41,10 +41,10 @@ int	check_letters(t_map *game)
 		{
 			if (check_character(&character, game->map[j][i]) < 1)
 				return (-1);
-			if (game->map[j][i] != '1' && game->map[j][i] != '0'
-				&& game->map[j][i] != 'W' && game->map[j][i] != 'N'
-				&& game->map[j][i] != 'E' && game->map[j][i] != 'S'
-				&& game->map[j][i] != ' ')
+			if (game->map[j][i] != '1' && game->map[j][i] != '0' &&
+				game->map[j][i] != 'W' && game->map[j][i] != 'N' &&
+				game->map[j][i] != 'E' && game->map[j][i] != 'S' &&
+				game->map[j][i] != ' ')
 			{
 				free_map(game->map);
 				return (ft_error('2'));
@@ -52,6 +52,8 @@ int	check_letters(t_map *game)
 		}
 		i = -1;
 	}
+	if (character != 1)
+		return (ft_error('2'));
 	return (1);
 }
 

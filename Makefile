@@ -6,12 +6,12 @@
 #    By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/30 14:49:39 by crmunoz-          #+#    #+#              #
-#    Updated: 2025/02/14 15:33:28 by crmunoz-         ###   ########.fr        #
+#    Updated: 2025/02/24 15:56:53 by crmunoz-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= cub3d
-CFLAGS	:= -g -Wextra -Wall -Werror
+CFLAGS	:= -Wextra -Wall -Werror #-g -fsanitize=address
 MLX_DIR	= ./MLX42
 MLX	:= $(MLX_DIR)/libmlx42.a
 HEADERS	:= -I$(MLX)

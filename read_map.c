@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:10:52 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/18 15:54:35 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:42:17 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	read_file(char *argv, t_map *game)
 	if (fd < 0)
 		exit(1);
 	rows = count_lines(argv);
+	if (rows < 1)
+		exit (1);
 	game->file = (char **)malloc(sizeof(char *) * (rows + 1));
 	if (!game->file)
 		free_map(game->file);
@@ -80,18 +82,19 @@ char	*ft_cpyrgb(char *src)
 	while (src[len] && ft_isspace(src[len]))
 		len++;
 	i = len;
-	while (!ft_isspace(src[len]))
+	while (src[len] != '\n')
 		len++;
 	len = len - i;
 	dst = malloc(sizeof(char) * len + 1);
-	len = 0;
-	while (src[i] && (!ft_isspace(src[i])))
+	if (!dst)
+		return (0);
+	len = -1;
+	while (src[i] && (src[i]) != '\n')
 	{
-		dst[len] = src[i];
-		len++;
+		dst[++len] = src[i];
 		i++;
 	}
-	dst[len] = '\0';
+	dst[++len] = '\0';
 	return (dst);
 }
 

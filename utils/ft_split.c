@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 13:26:07 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/18 17:42:32 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:51:47 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	count_words(char const *s, char c)
 			n_words++;
 		i++;
 	}
-	if (n_words > 3)
+	if (n_words != 3)
 		return (ft_error('2'));
 	return (n_words);
 }
