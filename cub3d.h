@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:11:24 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/24 18:11:33 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:34:22 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_map
 	long		rgb_floor[3];
 	char		*ceiling;
 	long		rgb_ceiling[3];
+	int			i;
 	mlx_t		*mlx;
 }				t_map;
 

@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:10:52 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/24 17:42:17 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/25 17:44:54 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,12 @@ int	begin_map(t_map *game, int i)
 
 	while (game->file[i])
 	{
-		if (ft_strchr(game->file[i], '1') >= 0)
+		if (game->file[i][0] == '\n')
+			i++;
+		else if (ft_strchr(game->file[i], '1') >= 0)
 			break ;
-		i++;
+		else
+			return (-1);
 	}
 	j = i;
 	len_max = ft_strlen(game->file[i]);

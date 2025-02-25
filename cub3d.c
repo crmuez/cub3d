@@ -6,25 +6,11 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:33:36 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/24 18:12:28 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:29:56 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	init_null(t_map (*game))
-{
-	ft_bzero(game, sizeof(t_map));
-/* 	game->file = NULL;
-	game->mlx = NULL;
-	game->map = NULL;
-	game->no_tx = NULL;
-	game->so_tx = NULL;
-	game->ea_tx = NULL;
-	game->we_tx = NULL;
-	game->floor = NULL;
-	game->ceiling = NULL; */
-}
 
 void draw_vertical_line(mlx_image_t* img, int x, int start_y, int end_y, uint32_t color) {
     if (!img) return;
@@ -93,7 +79,7 @@ int	main(int argc, char **argv)
 	game = malloc(sizeof(t_map));
 	if (!game)
 		return (ft_error('1'));
-	init_null(game);
+	ft_bzero(game, sizeof(game));
 	read_file(argv[1], game);
 	if (check_texture(game) < 0)
 		return (0);

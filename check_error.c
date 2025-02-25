@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:03:35 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/24 15:56:12 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:34:36 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,28 @@ int	check_character(int *character, char c)
 
 int	check_letters(t_map *game)
 {
-	int	i;
 	int	j;
 	int	character;
 
-	i = -1;
+	game->i = -1;
 	j = -1;
 	character = 0;
 	while (game->map[++j])
 	{
-		while (game->map[j][++i] != '\n')
+		while (game->map[j][++game->i] != '\n')
 		{
-			if (check_character(&character, game->map[j][i]) < 1)
+			if (check_character(&character, game->map[j][game->i]) < 1)
 				return (-1);
-			if (game->map[j][i] != '1' && game->map[j][i] != '0' &&
-				game->map[j][i] != 'W' && game->map[j][i] != 'N' &&
-				game->map[j][i] != 'E' && game->map[j][i] != 'S' &&
-				game->map[j][i] != ' ')
+			if (game->map[j][game->i] != '1' && game->map[j][game->i] != '0' &&
+				game->map[j][game->i] != 'W' && game->map[j][game->i] != 'N' &&
+				game->map[j][game->i] != 'E' && game->map[j][game->i] != 'S' &&
+				game->map[j][game->i] != ' ')
 			{
 				free_map(game->map);
 				return (ft_error('2'));
 			}
 		}
-		i = -1;
+		game->i = -1;
 	}
 	if (character != 1)
 		return (ft_error('2'));
