@@ -50,6 +50,16 @@ typedef struct s_map
 	mlx_t		*mlx;
 }				t_map;
 
+typedef struct s_player
+{
+	double	playerX;
+	double	playerY;
+	double	dirX;
+	double	dirY;
+	double	planeX;
+	double	planeY;
+}				t_player;
+
 /* UTILS */
 int		ft_isspace(int c);
 int		ft_strncmp(char *s1, char *s2, size_t n);
