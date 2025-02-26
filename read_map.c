@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:10:52 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/14 11:35:19 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/25 17:44:54 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	read_file(char *argv, t_map *game)
 	if (fd < 0)
 		exit(1);
 	rows = count_lines(argv);
+	if (rows < 1)
+		exit (1);
 	game->file = (char **)malloc(sizeof(char *) * (rows + 1));
 	if (!game->file)
 		free_map(game->file);
@@ -80,18 +82,19 @@ char	*ft_cpyrgb(char *src)
 	while (src[len] && ft_isspace(src[len]))
 		len++;
 	i = len;
-	while (!ft_isspace(src[len]))
+	while (src[len] != '\n')
 		len++;
 	len = len - i;
 	dst = malloc(sizeof(char) * len + 1);
-	len = 0;
-	while (src[i] && (!ft_isspace(src[i])))
+	if (!dst)
+		return (0);
+	len = -1;
+	while (src[i] && (src[i]) != '\n')
 	{
-		dst[len] = src[i];
-		len++;
+		dst[++len] = src[i];
 		i++;
 	}
-	dst[len] = '\0';
+	dst[++len] = '\0';
 	return (dst);
 }
 
@@ -102,9 +105,12 @@ int	begin_map(t_map *game, int i)
 
 	while (game->file[i])
 	{
-		if (ft_strchr(game->file[i], '1') >= 0)
+		if (game->file[i][0] == '\n')
+			i++;
+		else if (ft_strchr(game->file[i], '1') >= 0)
 			break ;
-		i++;
+		else
+			return (-1);
 	}
 	j = i;
 	len_max = ft_strlen(game->file[i]);
@@ -130,10 +136,7 @@ void	save_map(t_map *game, int i)
 	i = 0;
 	while (game->file[j])
 	{
-		if (ft_strchr(game->file[j], '1') >= 0)
-			game->map[i] = ft_dupspace(game->file[j], game->maxlen_map);
-		else
-			break ;
+		game->map[i] = ft_dupspace(game->file[j], game->maxlen_map);
 		i++;
 		j++;
 	}

@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:11:35 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/14 15:46:25 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:53:28 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,7 @@ int	count_lines(char *argv)
 		map = get_next_line(fd);
 	}
 	close(fd);
+	if (i < 9)
+		return (ft_error('2'));
 	return (i);
 }

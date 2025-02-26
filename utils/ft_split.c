@@ -6,40 +6,39 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 13:26:07 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/14 16:15:35 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:51:47 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static int	count_words(char *str, char c)
+int	count_words(char const *s, char c)
 {
 	int	i;
-	int	trigger;
+	int	n_words;
 
 	i = 0;
-	trigger = 0;
-	while (*str)
+	n_words = 0;
+	while (s[i] != '\0')
 	{
-		if (*str != c && trigger == 0)
-		{
-			trigger = 1;
-			i++;
-		}
-		else if (*str == c)
-			trigger = 0;
-		str++;
+		if ((s[i] != c) && ((s[i + 1] == c) || (s[i + 1] == '\0')))
+			n_words++;
+		i++;
 	}
-	return (i);
+	if (n_words != 3)
+		return (ft_error('2'));
+	return (n_words);
 }
 
-static char	*word_dup(char *str, int start, int finish)
+char	*word_dup(char *str, int start, int finish)
 {
 	char	*word;
 	int		i;
 
 	i = 0;
 	word = malloc((finish - start + 1) * sizeof(char));
+	if (!word)
+		return (NULL);
 	while (start < finish)
 		word[i++] = str[start++];
 	word[i] = '\0';
@@ -53,13 +52,15 @@ char	**ft_split(char *s, char c)
 	int		index;
 	char	**split;
 
-	i = 0;
+	i = -1;
 	j = 0;
 	index = -1;
+	if ((count_words(s, c)) < 0)
+		return (NULL);
 	split = malloc((count_words(s, c) + 1) * sizeof(char *));
 	if (!s || !split)
 		return (0);
-	while (i <= ft_strlen(s))
+	while (++i <= ft_strlen(s))
 	{
 		if (s[i] != c && index < 0)
 			index = i;
@@ -68,7 +69,6 @@ char	**ft_split(char *s, char c)
 			split[j++] = word_dup(s, index, i);
 			index = -1;
 		}
-		i++;
 	}
 	split[j] = 0;
 	return (split);

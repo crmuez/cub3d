@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:33:36 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/17 18:18:01 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:29:56 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,19 +211,22 @@ int	main(int argc, char **argv)
 	t_map	*game;
 	
 	if (argc != 2)
-	return (ft_error('0'));
+		return (ft_error('0'));
 	if (ft_strncmp(ft_strrchr(argv[1], '.'), ".cub", 4) != 0)
-	return (ft_error('3'));
+		return (ft_error('3'));
 	game = malloc(sizeof(t_map));
 	if (!game)
 		return (ft_error('1'));
-	init_null(game);
+	ft_bzero(game, sizeof(game));
 	read_file(argv[1], game);
-	save_texture(game);
+	if (check_texture(game) < 0)
+		return (0);
+	if (save_texture(game) < 1)
+		return (0);
 	if (check_error(*argv, game) > 0)
 	{
+		//game->mlx = mlx_init(640, 480, "Cub3D", true);
 		test_ray(game);
-		
 		//mlx_key_hook(game->mlx, &my_keyhook, game);
 		//mlx_loop(game->mlx);
 		//mlx_terminate(game->mlx);

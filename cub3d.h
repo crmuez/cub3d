@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:11:24 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/14 16:15:42 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:34:22 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_map
 	long		rgb_floor[3];
 	char		*ceiling;
 	long		rgb_ceiling[3];
+	int			i;
 	mlx_t		*mlx;
 }				t_map;
 
@@ -88,10 +89,12 @@ int		begin_map(t_map *game, int i);
 void	save_map(t_map *game, int i);
 
 /* SAVE TEXTURES */
-void	save_texture(t_map *game);
+int		save_texture(t_map *game);
 int		save_rgb(char *colors, long *rgb);
+int		check_texture(t_map *game);
 
 /* CHECK_ERROR */
 int		check_error(char *argv, t_map *game);
+void	ft_bzero(void *s, size_t n);
 
 #endif
