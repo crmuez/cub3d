@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:11:24 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/25 15:34:22 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:33:32 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ typedef struct s_map
 
 typedef struct s_player
 {
-	double	playerX;
-	double	playerY;
-	double	dirX;
-	double	dirY;
-	double	planeX;
-	double	planeY;
+	double	player_x;
+	double	player_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 }				t_player;
 
 /* UTILS */
