@@ -33,6 +33,16 @@
 # include <sys/stat.h>
 # include <unistd.h>
 
+typedef struct s_player
+{
+	double	player_x;
+	double	player_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+}				t_player;
+
 typedef struct s_map
 {
 	char		**file;
@@ -48,18 +58,10 @@ typedef struct s_map
 	char		*ceiling;
 	long		rgb_ceiling[3];
 	int			i;
+	mlx_image_t *img;
+	t_player	*player;
 	mlx_t		*mlx;
 }				t_map;
-
-typedef struct s_player
-{
-	double	player_x;
-	double	player_y;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
-}				t_player;
 
 /* UTILS */
 int		ft_isspace(int c);
