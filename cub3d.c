@@ -69,7 +69,7 @@ void clear_image(mlx_image_t *img)
 	}
 }
 
-void render_raycasting(mlx_image_t *img, t_player *player) {
+void render_raycasting(mlx_image_t *img, t_player *player, t_map *game) {
 	int map[10][10] = {
 		{1,1,1,1,1,1,1,1,1,1},
 		{1,0,0,0,0,0,0,0,0,1},
@@ -140,9 +140,23 @@ void render_raycasting(mlx_image_t *img, t_player *player) {
 		if (drawStart < 0) drawStart = 0;
 		if (drawEnd >= HEIGHT) drawEnd = HEIGHT - 1;
 
-		uint32_t color = (side == 0) ? 0xAAAAAA : 0x777777;
+		double wallX = (side == 0) ? player->player_y + perpWallDist * raydir_y
+								   : player->player_x + perpWallDist * raydir_x;
+		wallX -= floor(wallX);
+
+		int texX = (int)(wallX * game->wall->width);
+		if ((side == 0 && raydir_x > 0) || (side == 1 && raydir_y < 0))
+			texX = game->wall->width - texX - 1;
 
 		for (int y = drawStart; y < drawEnd; y++) {
+			int texY = ((y - drawStart) * game->wall->height) / (drawEnd - drawStart);
+			int texIndex = (texY * game->wall->width + texX) * 4;
+
+			uint8_t r = game->wall->pixels[texIndex];
+			uint8_t g = game->wall->pixels[texIndex + 1];
+			uint8_t b = game->wall->pixels[texIndex + 2];
+
+			uint32_t color = (r << 24) | (g << 16) | (b << 8) | 255;
 			mlx_put_pixel(img, x, y, color);
 		}
 	}
@@ -165,7 +179,7 @@ void key_hook(mlx_key_data_t keydata, void *param)
 void game_loop(void *param) {
     t_map *game = (t_map *)param;
     clear_image(game->img);
-    render_raycasting(game->img, game->player);
+    render_raycasting(game->img, game->player, game);
     mlx_image_to_window(game->mlx, game->img, 0, 0);
 }
 
@@ -187,6 +201,7 @@ void test_ray(t_map *game) {
 		return;
 	}
 	game->img = img;
+	game->wall = mlx_load_png("assets/daniego2.png");
 
 	mlx_key_hook(game->mlx, key_hook, player);
 	mlx_loop_hook(game->mlx, game_loop, game);

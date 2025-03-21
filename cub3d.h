@@ -45,22 +45,23 @@ typedef struct s_player
 
 typedef struct s_map
 {
-	char		**file;
-	char		**map;
-	int			maxlen_map;
-	int			maxlin_map;
-	char		*no_tx;
-	char		*so_tx;
-	char		*we_tx;
-	char		*ea_tx;
-	char		*floor;
-	long		rgb_floor[3];
-	char		*ceiling;
-	long		rgb_ceiling[3];
-	int			i;
-	mlx_image_t *img;
-	t_player	*player;
-	mlx_t		*mlx;
+	char			**file;
+	char			**map;
+	int				maxlen_map;
+	int				maxlin_map;
+	char			*no_tx;
+	mlx_texture_t	 *wall;
+	char			*so_tx;
+	char			*we_tx;
+	char			*ea_tx;
+	char			*floor;
+	long			rgb_floor[3];
+	char			*ceiling;
+	long			rgb_ceiling[3];
+	int				i;
+	mlx_image_t 	*img;
+	t_player		*player;
+	mlx_t			*mlx;
 }				t_map;
 
 /* UTILS */
