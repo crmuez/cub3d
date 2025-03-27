@@ -25,34 +25,49 @@ void	init_null(t_map (*game))
 	game->ceiling = NULL;
 }
 
-void move_forward(t_player *player)
-{
-	int map[10][10] = {
-		{1,1,1,1,1,1,1,1,1,1},
-		{1,0,0,0,0,0,0,0,0,1},
-		{1,0,1,1,1,1,1,1,0,1},
-		{1,0,1,0,0,0,0,1,0,1},
-		{1,0,1,0,1,1,0,1,0,1},
-		{1,0,1,0,1,1,0,1,0,1},
-		{1,0,1,0,0,0,0,1,0,1},
-		{1,0,1,1,1,1,1,1,0,1},
-		{1,0,0,0,0,0,0,0,0,1},
-		{1,1,1,1,1,1,1,1,1,1}
-	};
+void move_forward(t_player *player, char **map) {
+	if (map[(int)(player->player_y)]
+	       [(int)(player->player_x + player->dir_x * 0.1)] != '1')
+		player->player_x += player->dir_x * 0.1;
 
-    if (!map[(int)(player->player_y)][(int)(player->player_x + player->dir_x * 0.1)])
-        player->player_x += player->dir_x * 0.1;
-    if (!map[(int)(player->player_y + player->dir_y * 0.1)][(int)(player->player_x)])
-        player->player_y += player->dir_y * 0.1;
+	if (map[(int)(player->player_y + player->dir_y * 0.1)]
+	       [(int)(player->player_x)] != '1')
+		player->player_y += player->dir_y * 0.1;
 }
 
-void rotate_left(t_player *player)
-{
+void move_backward(t_player *player, char **map) {
+	if (map[(int)(player->player_y)]
+	       [(int)(player->player_x - player->dir_x * 0.1)] != '1')
+		player->player_x -= player->dir_x * 0.1;
+
+	if (map[(int)(player->player_y - player->dir_y * 0.1)]
+	       [(int)(player->player_x)] != '1')
+		player->player_y -= player->dir_y * 0.1;
+}
+
+void rotate_left(t_player *player) {
+    double angle = 0.1;
     double olddir_x = player->dir_x;
-    player->dir_x = player->dir_x * cos(0.1) - player->dir_y * sin(0.1);
-    player->dir_y = olddir_x * sin(0.1) + player->dir_y * cos(0.1);
+    double oldplane_x = player->plane_x;
+
+    player->dir_x = player->dir_x * cos(angle) - player->dir_y * sin(angle);
+    player->dir_y = olddir_x * sin(angle) + player->dir_y * cos(angle);
+
+    player->plane_x = player->plane_x * cos(angle) - player->plane_y * sin(angle);
+    player->plane_y = oldplane_x * sin(angle) + player->plane_y * cos(angle);
 }
 
+void rotate_right(t_player *player) {
+    double angle = -0.1;
+    double olddir_x = player->dir_x;
+    double oldplane_x = player->plane_x;
+
+    player->dir_x = player->dir_x * cos(angle) - player->dir_y * sin(angle);
+    player->dir_y = olddir_x * sin(angle) + player->dir_y * cos(angle);
+
+    player->plane_x = player->plane_x * cos(angle) - player->plane_y * sin(angle);
+    player->plane_y = oldplane_x * sin(angle) + player->plane_y * cos(angle);
+}
 
 void close_hook(void *param) {
 	mlx_terminate((mlx_t *)param);
@@ -69,20 +84,8 @@ void clear_image(mlx_image_t *img)
 	}
 }
 
-void render_raycasting(mlx_image_t *img, t_player *player, t_map *game) {
-	int map[10][10] = {
-		{1,1,1,1,1,1,1,1,1,1},
-		{1,0,0,0,0,0,0,0,0,1},
-		{1,0,1,1,1,1,1,1,0,1},
-		{1,0,1,0,0,0,0,1,0,1},
-		{1,0,1,0,1,1,0,1,0,1},
-		{1,0,1,0,1,1,0,1,0,1},
-		{1,0,1,0,0,0,0,1,0,1},
-		{1,0,1,1,1,1,1,1,0,1},
-		{1,0,0,0,0,0,0,0,0,1},
-		{1,1,1,1,1,1,1,1,1,1}
-	};
-
+void render_raycasting(mlx_image_t *img, t_player *player, t_map *game)
+{
 	clear_image(img);
 	for (int x = 0; x < WIDTH; x++) {
 		double camera_x = 2 * x / (double)WIDTH - 1;
@@ -125,7 +128,8 @@ void render_raycasting(mlx_image_t *img, t_player *player, t_map *game) {
 				mapY += stepY;
 				side = 1;
 			}
-			if (map[mapY][mapX] > 0) hit = 1;
+			if (game->map[mapY][mapX] == '1')
+				hit = 1;
 		}
 
 		if (side == 0)
@@ -144,7 +148,7 @@ void render_raycasting(mlx_image_t *img, t_player *player, t_map *game) {
 								   : player->player_x + perpWallDist * raydir_x;
 		wallX -= floor(wallX);
 
-		int texX = (int)(wallX * game->wall->width);
+		/*int texX = (int)(wallX * game->wall->width);
 		if ((side == 0 && raydir_x > 0) || (side == 1 && raydir_y < 0))
 			texX = game->wall->width - texX - 1;
 
@@ -158,20 +162,54 @@ void render_raycasting(mlx_image_t *img, t_player *player, t_map *game) {
 
 			uint32_t color = (r << 24) | (g << 16) | (b << 8) | 255;
 			mlx_put_pixel(img, x, y, color);
+		}*/
+
+		int texX = (int)(wallX * game->n_wall->width);
+		if ((side == 0 && raydir_x > 0) || (side == 1 && raydir_y < 0))
+			texX = game->e_wall->width - texX - 1;
+
+		mlx_texture_t *texture = NULL;
+
+		if (side == 0) {
+			if (raydir_x > 0)
+				texture = game->w_wall;
+			else
+				texture = game->e_wall;
+		} else {
+			if (raydir_y > 0)
+				texture = game->s_wall;
+			else
+				texture = game->n_wall;
+		}
+
+		for (int y = drawStart; y < drawEnd; y++) {
+			int texY = ((y - drawStart) * texture->height) / (drawEnd - drawStart);
+			int texIndex = (texY * texture->width + texX) * 4;
+
+			uint8_t r = texture->pixels[texIndex];
+			uint8_t g = texture->pixels[texIndex + 1];
+			uint8_t b = texture->pixels[texIndex + 2];
+
+			uint32_t color = (r << 24) | (g << 16) | (b << 8) | 255;
+			mlx_put_pixel(img, x, y, color);
 		}
 	}
 }
 
 void key_hook(mlx_key_data_t keydata, void *param)
 {
-	t_player *player = (t_player *)param;
+	t_map *game = (t_map *)param;
 
-	if (keydata.action == MLX_PRESS)
+	if (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS)
 	{
 		if (keydata.key == MLX_KEY_W)
-			move_forward(player);
+			move_forward(game->player, game->map);
+		if (keydata.key == MLX_KEY_S)
+			move_backward(game->player, game->map);
+		if (keydata.key == MLX_KEY_D)
+			rotate_right(game->player);
 		if (keydata.key == MLX_KEY_A)
-			rotate_left(player);
+			rotate_left(game->player);
 	}
 	
 }
@@ -189,8 +227,8 @@ void test_ray(t_map *game) {
 	player->player_y = 3.5;
 	player->dir_x = -1.0;
 	player->dir_y = 0.0;
-	player->plane_x = 0.66 * player->dir_y;
-	player->plane_y = -0.66 * player->dir_x;
+	player->plane_x = 0.5 * player->dir_y;
+	player->plane_y = -0.5 * player->dir_x;
 
 	game->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", true);
 	game->player = player;
@@ -201,13 +239,31 @@ void test_ray(t_map *game) {
 		return;
 	}
 	game->img = img;
-	game->wall = mlx_load_png("assets/daniego2.png");
+	game->n_wall = mlx_load_png("assets/blue.png");
+	game->e_wall = mlx_load_png("assets/green.png");
+	game->w_wall = mlx_load_png("assets/daniego2.png");
+	game->s_wall = mlx_load_png("assets/danielos.png");
 
-	mlx_key_hook(game->mlx, key_hook, player);
+	mlx_key_hook(game->mlx, key_hook, game);
 	mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
 	free(game->player);
+}
+
+void print_map(t_map *game) {
+	printf("EA: %s\n", game->ea_tx);
+	printf("WE: %s\n", game->we_tx);
+	printf("NO: %s\n", game->no_tx);
+	printf("SO: %s\n", game->so_tx);
+	printf("Floor: r%lig%lib%li\n", game->rgb_floor[0], game->rgb_floor[1], game->rgb_floor[2]);
+	printf("Ceiling:r%lig%lib%li\n", game->rgb_ceiling[0], game->rgb_ceiling[1], game->rgb_ceiling[2]);
+	int i = 0;
+	while (game->map[i])
+	{
+		printf("%s", game->map[i]);
+		i++;
+	}
 }
 
 int	main(int argc, char **argv)
@@ -229,23 +285,9 @@ int	main(int argc, char **argv)
 		return (0);
 	if (check_error(*argv, game) > 0)
 	{
+		//print_map(game);
 		test_ray(game);
 	}
 	return (0);
 }
-//print_map(game);
-/*
-printf("EA: %s\n", game->ea_tx);
-printf("WE: %s\n", game->we_tx);
-printf("NO: %s\n", game->no_tx);
-printf("SO: %s\n", game->so_tx);
-printf("Floor: r%lig%lib%li\n", game->rgb_floor[0], game->rgb_floor[1], game->rgb_floor[2]);
-printf("Ceiling:r%lig%lib%li\n", game->rgb_ceiling[0], game->rgb_ceiling[1], game->rgb_ceiling[2]);
-int i = 0;
-while (game->map[i])
-{
-	printf("%s", game->map[i]);
-	i++;
-}
 
-*/

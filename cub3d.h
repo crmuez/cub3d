@@ -50,7 +50,10 @@ typedef struct s_map
 	int				maxlen_map;
 	int				maxlin_map;
 	char			*no_tx;
-	mlx_texture_t	 *wall;
+	mlx_texture_t	*n_wall;
+	mlx_texture_t	*e_wall;
+	mlx_texture_t	*w_wall;
+	mlx_texture_t	*s_wall;
 	char			*so_tx;
 	char			*we_tx;
 	char			*ea_tx;
