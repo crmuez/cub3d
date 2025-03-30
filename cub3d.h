@@ -41,6 +41,7 @@ typedef struct s_player
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
+	char	direction;
 }				t_player;
 
 typedef struct s_map
@@ -49,11 +50,11 @@ typedef struct s_map
 	char			**map;
 	int				maxlen_map;
 	int				maxlin_map;
-	char			*no_tx;
 	mlx_texture_t	*n_wall;
 	mlx_texture_t	*e_wall;
 	mlx_texture_t	*w_wall;
 	mlx_texture_t	*s_wall;
+	char			*no_tx;
 	char			*so_tx;
 	char			*we_tx;
 	char			*ea_tx;
@@ -68,39 +69,68 @@ typedef struct s_map
 }				t_map;
 
 /* UTILS */
-int		ft_isspace(int c);
-int		ft_strncmp(char *s1, char *s2, size_t n);
-char	*get_next_line(int fd);
-char	*ft_strdup(char *s1);
-int		ft_strlen(char *s);
-int		ft_strchr(char *s, int c);
-char	*ft_strjoin(char *s1, char *s2);
-int		ft_error(int err);
-void	free_map(char **map);
-int		count_lines(char *argv);
-char	*ft_strrchr(char *s, int c);
-char	*fillspace(int len);
-char	*ft_dupspace(char *s1, int len);
-long	ft_atol(char *str);
-char	**ft_split(char *s, char c);
+int			ft_isspace(int c);
+int			ft_strncmp(char *s1, char *s2, size_t n);
+char		*get_next_line(int fd);
+char		*ft_strdup(char *s1);
+int			ft_strlen(char *s);
+int			ft_strchr(char *s, int c);
+char		*ft_strjoin(char *s1, char *s2);
+int			ft_error(int err);
+void		free_map(char **map);
+int			count_lines(char *argv);
+char		*ft_strrchr(char *s, int c);
+char		*fillspace(int len);
+char		*ft_dupspace(char *s1, int len);
+long		ft_atol(char *str);
+char		**ft_split(char *s, char c);
+void		init_null(t_map (*game));
+void 		clear_image(mlx_image_t *img);
 
 /* CUB3D */
-void	read_file(char *argv, t_map *game);
+void		read_file(char *argv, t_map *game);
 
 /* READ_MAP */
-void	read_file(char *argv, t_map *game);
-char	*ft_cpytexture(char *src);
-char	*ft_cpyrgb(char *src);
-int		begin_map(t_map *game, int i);
-void	save_map(t_map *game, int i);
+void		read_file(char *argv, t_map *game);
+char		*ft_cpytexture(char *src);
+char		*ft_cpyrgb(char *src);
+int			begin_map(t_map *game, int i);
+void		save_map(t_map *game, int i);
 
 /* SAVE TEXTURES */
-int		save_texture(t_map *game);
-int		save_rgb(char *colors, long *rgb);
-int		check_texture(t_map *game);
+int			save_texture(t_map *game);
+int			save_rgb(char *colors, long *rgb);
+int			check_texture(t_map *game);
 
 /* CHECK_ERROR */
-int		check_error(char *argv, t_map *game);
-void	ft_bzero(void *s, size_t n);
+int			check_error(char *argv, t_map *game);
+void		ft_bzero(void *s, size_t n);
+
+/* DIRECTION */
+char		get_player_direction(t_player *player, char **map);
+void 		set_north(t_player *player);
+void 		set_west(t_player *player);
+void 		set_south(t_player *player);
+void 		set_east(t_player *player);
+
+/* MOVEMENT */
+void		move_forward(t_player *player, char **map);
+void 		move_backward(t_player *player, char **map);
+void 		strafe_left(t_player *player, char **map);
+void		strafe_right(t_player *player, char **map);
+
+/* CAMERA */
+void 		rotate_left(t_player *player);
+void 		rotate_right(t_player *player);
+
+/* GAME */
+void		close_hook(void *param);
+void 		key_hook(mlx_key_data_t keydata, void *param);
+void 		game_loop(void *param);
+t_player 	*init_player(char **map);
+void 		load_textures(t_map *game);
+
+/* RAYCASTING */
+void 		render_raycasting(mlx_image_t *img, t_player *player, t_map *game);
 
 #endif
