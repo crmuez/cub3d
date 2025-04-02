@@ -13,11 +13,16 @@
 #include "cub3d.h"
 
 void start_raycasting(t_map *game) {
-	t_player *player;
+	t_player 	*player;
+	t_math		*math;
 
+	math = malloc(sizeof(t_math));
+	if (!math)
+		exit(1);
 	player = init_player(game->map);
 	game->mlx = mlx_init(WIDTH, HEIGHT, "Cub3D", true);
 	game->player = player;
+	game->math = math;
 	load_textures(game);
 	mlx_key_hook(game->mlx, key_hook, game);
 	mlx_loop_hook(game->mlx, game_loop, game);

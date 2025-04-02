@@ -44,6 +44,38 @@ typedef struct s_player
 	char	direction;
 }				t_player;
 
+typedef struct s_math
+{
+	uint32_t	floor_color;
+	uint32_t	ceiling_color;
+	uint32_t	color;
+	double		camera_x;
+	double		raydir_x;
+	double		raydir_y;
+	int			map_x;
+	int			map_y;
+	double		sidedist_x;
+	double		sidedist_y;
+	double		deltadist_x;
+	double		deltadist_y;
+	double		perpdist;
+	int			step_x;
+	int			step_y;
+	int			hit;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
+	double 		wall_x;
+	int 		tex_x;
+	int			tex_y;
+	int			tex_index;
+	uint8_t 	color_r;
+	uint8_t		color_g;
+	uint8_t		color_b;
+	uint32_t	color_full;
+	int			side;
+}				t_math;
+
 typedef struct s_map
 {
 	char			**file;
@@ -54,6 +86,7 @@ typedef struct s_map
 	mlx_texture_t	*e_wall;
 	mlx_texture_t	*w_wall;
 	mlx_texture_t	*s_wall;
+	mlx_texture_t	*texture;
 	char			*no_tx;
 	char			*so_tx;
 	char			*we_tx;
@@ -65,6 +98,7 @@ typedef struct s_map
 	int				i;
 	mlx_image_t 	*img;
 	t_player		*player;
+	t_math			*math;
 	mlx_t			*mlx;
 }				t_map;
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils3.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dramos-n <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/02 20:00:52 by dramos-n          #+#    #+#             */
+/*   Updated: 2025/04/02 20:00:53 by dramos-n         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
 void	init_null(t_map (*game))
@@ -13,13 +25,20 @@ void	init_null(t_map (*game))
 	game->ceiling = NULL;
 }
 
-void clear_image(mlx_image_t *img)
+void	clear_image(mlx_image_t *img)
 {
-	for (int x = 0; x < WIDTH; x++)
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < WIDTH)
 	{
-		for (int y = 0; y < HEIGHT; y++)
+		y = 0;
+		while (y < HEIGHT)
 		{
 			mlx_put_pixel(img, x, y, 0xFF0000);
+			y++;
 		}
+		x++;
 	}
 }
