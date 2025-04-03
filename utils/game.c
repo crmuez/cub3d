@@ -1,14 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dramos-n <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/03 17:43:30 by dramos-n          #+#    #+#             */
+/*   Updated: 2025/04/03 17:43:31 by dramos-n         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3d.h"
 
-void close_hook(void *param)
+void	close_hook(void *param)
 {
 	mlx_terminate((mlx_t *)param);
 }
 
-void key_hook(mlx_key_data_t keydata, void *param)
+void	key_hook(mlx_key_data_t keydata, void *param)
 {
-	t_map *game = (t_map *)param;
+	t_map	*game;
 
+	game = (t_map *)param;
 	if (keydata.action == MLX_REPEAT || keydata.action == MLX_PRESS)
 	{
 		if (keydata.key == MLX_KEY_W)
@@ -28,18 +41,21 @@ void key_hook(mlx_key_data_t keydata, void *param)
 	}
 }
 
-void game_loop(void *param)
+void	game_loop(void *param)
 {
-    t_map *game = (t_map *)param;
-    clear_image(game->img);
-    render_raycasting(game->img, game->player, game);
-    mlx_image_to_window(game->mlx, game->img, 0, 0);
+	t_map	*game;
+
+	game = (t_map *)param;
+	clear_image(game->img);
+	render_raycasting(game->img, game->player, game);
+	mlx_image_to_window(game->mlx, game->img, 0, 0);
 }
 
-t_player *init_player(char **map)
+t_player	*init_player(char **map)
 {
-	t_player *player = malloc(sizeof(t_player));
+	t_player	*player;
 
+	player = malloc(sizeof(t_player));
 	get_player_direction(player, map);
 	if (player->direction == 'N')
 		set_north(player);
@@ -52,12 +68,15 @@ t_player *init_player(char **map)
 	return (player);
 }
 
-void load_textures(t_map *game)
+void	load_textures(t_map *game)
 {
-	mlx_image_t *img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	if (!img) {
+	mlx_image_t	*img;
+
+	img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	if (!img)
+	{
 		printf("Error: Failed to create image\n");
-		return;
+		return ;
 	}
 	game->img = img;
 	game->n_wall = mlx_load_png(game->no_tx);

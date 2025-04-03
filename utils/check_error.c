@@ -40,10 +40,7 @@ int	check_letters(t_map *game)
 		{
 			if (check_character(&character, game->map[j][game->i]) < 1)
 				return (-1);
-			if (game->map[j][game->i] != '1' && game->map[j][game->i] != '0' &&
-				game->map[j][game->i] != 'W' && game->map[j][game->i] != 'N' &&
-				game->map[j][game->i] != 'E' && game->map[j][game->i] != 'S' &&
-				game->map[j][game->i] != ' ')
+			if (check_chars(game) == 1)
 			{
 				free_map(game->map);
 				return (ft_error('2'));
@@ -67,16 +64,11 @@ int	check_valid_map(t_map *game)
 	{
 		while (game->map[j][++i] != '\n')
 		{
-			if (game->map[j][i] == '0' || game->map[j][i] == 'W'
-				|| game->map[j][i] == 'N' || game->map[j][i] == 'E'
-				|| game->map[j][i] == 'S')
+			if (check_dir(game->map[j][i]) == 1)
 			{
 				if (j == 0 || j == (game->maxlin_map - 1))
 					return (ft_error('2'));
-				else if ((ft_isspace(game->map[j + 1][i]))
-				|| (ft_isspace(game->map[j - 1][i]))
-				|| (ft_isspace(game->map[j][i + 1]))
-				|| (ft_isspace(game->map[j][i - 1])))
+				else if (check_isspace(game) == 1)
 					return (ft_error('2'));
 			}
 		}

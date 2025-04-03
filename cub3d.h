@@ -65,11 +65,11 @@ typedef struct s_math
 	int			line_height;
 	int			draw_start;
 	int			draw_end;
-	double 		wall_x;
-	int 		tex_x;
+	double		wall_x;
+	int			tex_x;
 	int			tex_y;
 	int			tex_index;
-	uint8_t 	color_r;
+	uint8_t		color_r;
 	uint8_t		color_g;
 	uint8_t		color_b;
 	uint32_t	color_full;
@@ -96,7 +96,7 @@ typedef struct s_map
 	char			*ceiling;
 	long			rgb_ceiling[3];
 	int				i;
-	mlx_image_t 	*img;
+	mlx_image_t		*img;
 	t_player		*player;
 	t_math			*math;
 	mlx_t			*mlx;
@@ -119,7 +119,7 @@ char		*ft_dupspace(char *s1, int len);
 long		ft_atol(char *str);
 char		**ft_split(char *s, char c);
 void		init_null(t_map (*game));
-void 		clear_image(mlx_image_t *img);
+void		clear_image(mlx_image_t *img);
 
 /* CUB3D */
 void		read_file(char *argv, t_map *game);
@@ -142,29 +142,39 @@ void		ft_bzero(void *s, size_t n);
 
 /* DIRECTION */
 char		get_player_direction(t_player *player, char **map);
-void 		set_north(t_player *player);
-void 		set_west(t_player *player);
-void 		set_south(t_player *player);
-void 		set_east(t_player *player);
+void		set_north(t_player *player);
+void		set_west(t_player *player);
+void		set_south(t_player *player);
+void		set_east(t_player *player);
 
 /* MOVEMENT */
 void		move_forward(t_player *player, char **map);
-void 		move_backward(t_player *player, char **map);
-void 		strafe_left(t_player *player, char **map);
+void		move_backward(t_player *player, char **map);
+void		strafe_left(t_player *player, char **map);
 void		strafe_right(t_player *player, char **map);
 
 /* CAMERA */
-void 		rotate_left(t_player *player);
-void 		rotate_right(t_player *player);
+void		rotate_left(t_player *player);
+void		rotate_right(t_player *player);
 
 /* GAME */
 void		close_hook(void *param);
-void 		key_hook(mlx_key_data_t keydata, void *param);
-void 		game_loop(void *param);
-t_player 	*init_player(char **map);
-void 		load_textures(t_map *game);
+void		key_hook(mlx_key_data_t keydata, void *param);
+void		game_loop(void *param);
+t_player	*init_player(char **map);
+void		load_textures(t_map *game);
+
+/* CEHCKER */
+int			check_dir(char c);
+int			check_isspace(t_map *game);
+int			check_chars(t_map *game);
 
 /* RAYCASTING */
-void 		render_raycasting(mlx_image_t *img, t_player *player, t_map *game);
+void		render_raycasting(mlx_image_t *img, t_player *player, t_map *game);
+void		set_fc_color(t_map *game);
+void		draw_fc(t_map *game, mlx_image_t *img);
+void		init_rays(t_map *game, t_player *player, int x);
+void		init_step(t_map *game, t_player *player);
+void		calculate_hit(t_map *game);
 
 #endif

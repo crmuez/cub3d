@@ -12,8 +12,9 @@
 
 #include "cub3d.h"
 
-void start_raycasting(t_map *game) {
-	t_player 	*player;
+void	start_raycasting(t_map *game)
+{
+	t_player	*player;
 	t_math		*math;
 
 	math = malloc(sizeof(t_math));
@@ -34,7 +35,7 @@ void start_raycasting(t_map *game) {
 int	main(int argc, char **argv)
 {
 	t_map	*game;
-	
+
 	if (argc != 2)
 		return (ft_error('0'));
 	if (ft_strncmp(ft_strrchr(argv[1], '.'), ".cub", 4) != 0)
@@ -52,7 +53,6 @@ int	main(int argc, char **argv)
 		start_raycasting(game);
 	return (0);
 }
-
 
 /*void print_map(t_map *game) {
 	printf("EA: %s\n", game->ea_tx);
