@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-n <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:43:30 by dramos-n          #+#    #+#             */
-/*   Updated: 2025/04/03 17:43:31 by dramos-n         ###   ########.fr       */
+/*   Updated: 2025/04/10 13:48:43 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ t_player	*init_player(char **map)
 	return (player);
 }
 
+// Al cargar la imagen, si falla (!img) también hay que hacer free de todo
 void	load_textures(t_map *game)
 {
 	mlx_image_t	*img;
@@ -83,4 +84,9 @@ void	load_textures(t_map *game)
 	game->e_wall = mlx_load_png(game->ea_tx);
 	game->w_wall = mlx_load_png(game->we_tx);
 	game->s_wall = mlx_load_png(game->so_tx);
+	if (!game->n_wall || !game->e_wall || !game->w_wall || !game->s_wall)
+	{
+		printf("Error: Failed to create image\n");
+		exit(1);
+	}
 }

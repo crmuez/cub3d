@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:03:35 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/25 15:34:36 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/04/09 19:24:34 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	check_letters(t_map *game)
 		{
 			if (check_character(&character, game->map[j][game->i]) < 1)
 				return (-1);
-			if (check_chars(game) == 1)
+			if (check_chars(game, j, game->i) == 1)
 			{
 				free_map(game->map);
 				return (ft_error('2'));
@@ -68,7 +68,7 @@ int	check_valid_map(t_map *game)
 			{
 				if (j == 0 || j == (game->maxlin_map - 1))
 					return (ft_error('2'));
-				else if (check_isspace(game) == 1)
+				else if (check_isspace(game, j, i) == 1)
 					return (ft_error('2'));
 			}
 		}

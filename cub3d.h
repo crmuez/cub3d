@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:11:24 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/27 17:33:32 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/04/09 19:23:43 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,10 +164,10 @@ void		game_loop(void *param);
 t_player	*init_player(char **map);
 void		load_textures(t_map *game);
 
-/* CEHCKER */
+/* CHECKER */
 int			check_dir(char c);
-int			check_isspace(t_map *game);
-int			check_chars(t_map *game);
+int			check_isspace(t_map *game, int j, int i);
+int			check_chars(t_map *game, int j, int i);
 
 /* RAYCASTING */
 void		render_raycasting(mlx_image_t *img, t_player *player, t_map *game);

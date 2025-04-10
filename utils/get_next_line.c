@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:42:42 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/01/30 20:14:17 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/04/09 19:31:19 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,22 +133,3 @@ char	*get_next_line(int fd)
 		text = ft_strjoin(text, buffer);
 	return (manage_storage(fd, bytesread, &text));
 }
-/*
-#include <stdio.h>
-#include <fcntl.h>
-int	main()
-{
-	int fd = open ("hola", O_RDONLY);
-	printf("1. La puta función de los cojones: %s", get_next_line(fd));
-	printf("2. La puta función de los cojones: %s", get_next_line(fd));
-	printf("3. La puta función de los cojones: %s", get_next_line(fd));
-}
-#include <stdio.h>
-int	main(){
-	int str[22];
-	int	i = sizeof(str);
-	str[0] = 1;
-	str[1] = 2;
-	printf("%i\n%i\n%i", i, str[1], *str);
-}
-*/
