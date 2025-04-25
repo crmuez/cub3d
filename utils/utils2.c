@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 18:03:20 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/04/25 17:40:37 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/04/25 20:17:21 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,14 @@ void	ft_bzero(void *s, size_t n)
 
 void	ft_exit(t_map *game)
 {
-	mlx_close_window(game->mlx);
 	free_map(game->file);
 	free_map(game->map);
-	free_struct(game);
-	free(game);
+	if (game)
+	{
+		free_struct(game);
+		if (game->mlx)
+			mlx_close_window(game->mlx);
+		free(game);
+	}
 	exit(1);
 }

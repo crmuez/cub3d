@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:33:36 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/04/24 17:19:46 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/04/25 20:28:43 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@ void	start_raycasting(t_map *game)
 	mlx_key_hook(game->mlx, key_hook, game);
 	mlx_loop_hook(game->mlx, game_loop, game);
 	mlx_loop(game->mlx);
-	mlx_terminate(game->mlx);
-	free(game->player);
+	if (game->player)
+	{
+		free(game->player);
+		game->player = NULL;
+	}
 }
 
 int	main(int argc, char **argv)
@@ -52,6 +55,7 @@ int	main(int argc, char **argv)
 		return (0);
 	if (check_error(*argv, game) > 0)
 		start_raycasting(game);
+	ft_exit(game);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:00:52 by dramos-n          #+#    #+#             */
-/*   Updated: 2025/04/25 17:56:44 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/04/25 20:21:55 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,24 +58,27 @@ void	free_string(char *str)
 	}
 }
 
-void	free_struct(t_map *map)
+void	free_struct(t_map *game)
 {
-	if (map == NULL)
+	if (game == NULL)
 		return ;
-	free_texture(map->n_wall);
-	free_texture(map->e_wall);
-	free_texture(map->w_wall);
-	free_texture(map->s_wall);
-	free_string(map->no_tx);
-	free_string(map->so_tx);
-	free_string(map->we_tx);
-	free_string(map->ea_tx);
-	free_string(map->floor);
-	free_string(map->ceiling);
-	if (map->player != NULL)
-		free(map->player);
-	if (map->math != NULL)
-		free(map->math);
-	if (map->img != NULL)
-		mlx_delete_image(map->mlx, map->img);
+	free_texture(game->n_wall);
+	free_texture(game->e_wall);
+	free_texture(game->w_wall);
+	free_texture(game->s_wall);
+	free_string(game->no_tx);
+	free_string(game->so_tx);
+	free_string(game->we_tx);
+	free_string(game->ea_tx);
+	free_string(game->floor);
+	free_string(game->ceiling);
+	if (game->player)
+	{
+		free(game->player);
+		game->player = NULL;
+	}
+	if (game->math != NULL)
+		free(game->math);
+	if (game->img != NULL)
+		mlx_delete_image(game->mlx, game->img);
 }
