@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:33:36 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/27 17:39:45 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/04/24 17:19:46 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int argc, char **argv)
 	if (!game)
 		return (ft_error('1'));
 	ft_bzero(game, sizeof(game));
+	init_null(game);
 	read_file(argv[1], game);
 	if (check_texture(game) < 0)
 		return (0);

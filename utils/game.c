@@ -6,13 +6,13 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:43:30 by dramos-n          #+#    #+#             */
-/*   Updated: 2025/04/10 13:48:43 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:32:44 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	close_hook(void *param)
+void	close_hook(void *param) //revisar
 {
 	mlx_terminate((mlx_t *)param);
 }
@@ -37,7 +37,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		if (keydata.key == MLX_KEY_RIGHT)
 			rotate_left(game->player);
 		if (keydata.key == MLX_KEY_ESCAPE)
-			close_hook(param);
+			ft_exit(game);
 	}
 }
 
@@ -68,7 +68,6 @@ t_player	*init_player(char **map)
 	return (player);
 }
 
-// Al cargar la imagen, si falla (!img) también hay que hacer free de todo
 void	load_textures(t_map *game)
 {
 	mlx_image_t	*img;

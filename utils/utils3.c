@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-n <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:00:52 by dramos-n          #+#    #+#             */
-/*   Updated: 2025/04/02 20:00:53 by dramos-n         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:56:44 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,41 @@ void	clear_image(mlx_image_t *img)
 		}
 		x++;
 	}
+}
+
+void	free_texture(mlx_texture_t *texture)
+{
+	if (texture != NULL)
+		mlx_delete_texture(texture);
+}
+
+void	free_string(char *str)
+{
+	if (str != NULL)
+	{
+		free(str);
+		str = NULL;
+	}
+}
+
+void	free_struct(t_map *map)
+{
+	if (map == NULL)
+		return ;
+	free_texture(map->n_wall);
+	free_texture(map->e_wall);
+	free_texture(map->w_wall);
+	free_texture(map->s_wall);
+	free_string(map->no_tx);
+	free_string(map->so_tx);
+	free_string(map->we_tx);
+	free_string(map->ea_tx);
+	free_string(map->floor);
+	free_string(map->ceiling);
+	if (map->player != NULL)
+		free(map->player);
+	if (map->math != NULL)
+		free(map->math);
+	if (map->img != NULL)
+		mlx_delete_image(map->mlx, map->img);
 }

@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:11:24 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/04/09 19:23:43 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:33:58 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,11 @@ char		*ft_strrchr(char *s, int c);
 char		*fillspace(int len);
 char		*ft_dupspace(char *s1, int len);
 long		ft_atol(char *str);
+void		ft_exit(t_map *game);
 char		**ft_split(char *s, char c);
 void		init_null(t_map (*game));
 void		clear_image(mlx_image_t *img);
+void		free_struct(t_map *map);
 
 /* CUB3D */
 void		read_file(char *argv, t_map *game);
