@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:33:36 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/04/25 20:28:43 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/04/29 20:49:13 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,24 @@ int	main(int argc, char **argv)
 {
 	t_map	*game;
 
-	if (argc != 2)
+	if (argc != 2 || ft_strlen(argv[1]) < 5)
 		return (ft_error('0'));
-	if (ft_strncmp(ft_strrchr(argv[1], '.'), ".cub", 4) != 0)
+	if (!ft_strrchr(argv[1], '.')
+		|| ft_strncmp(ft_strrchr(argv[1], '.'), ".cub", 5) != 0)
 		return (ft_error('3'));
+	read_file(argv[1], game);
 	game = malloc(sizeof(t_map));
 	if (!game)
 		return (ft_error('1'));
 	ft_bzero(game, sizeof(game));
 	init_null(game);
-	read_file(argv[1], game);
 	if (check_texture(game) < 0)
-		return (0);
+		ft_exit(game);
 	if (save_texture(game) < 1)
-		return (0);
-	if (check_error(*argv, game) > 0)
-		start_raycasting(game);
-	ft_exit(game);
+		ft_exit(game);
+	if (check_error(*argv, game) < 0)
+		ft_exit(game);
+	start_raycasting(game);
 	return (0);
 }
 

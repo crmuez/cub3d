@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:43:30 by dramos-n          #+#    #+#             */
-/*   Updated: 2025/04/25 17:32:44 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/04/29 19:50:35 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	load_textures(t_map *game)
 	if (!img)
 	{
 		printf("Error: Failed to create image\n");
-		return ;
+		ft_exit(game);
 	}
 	game->img = img;
 	game->n_wall = mlx_load_png(game->no_tx);
@@ -86,6 +86,6 @@ void	load_textures(t_map *game)
 	if (!game->n_wall || !game->e_wall || !game->w_wall || !game->s_wall)
 	{
 		printf("Error: Failed to create image\n");
-		exit(1);
+		ft_exit(game);
 	}
 }

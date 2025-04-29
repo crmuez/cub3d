@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 20:00:52 by dramos-n          #+#    #+#             */
-/*   Updated: 2025/04/25 20:21:55 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/04/29 15:35:59 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,6 @@ void	free_struct(t_map *game)
 		free(game->math);
 	if (game->img != NULL)
 		mlx_delete_image(game->mlx, game->img);
+	if (game->mlx)
+		mlx_terminate(game->mlx);
 }

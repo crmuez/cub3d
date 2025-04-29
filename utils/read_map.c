@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:10:52 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/02/25 17:44:54 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/04/29 20:41:16 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	read_file(char *argv, t_map *game)
 
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
-		exit(1);
+		ft_error('5');
 	rows = count_lines(argv);
 	if (rows < 1)
 		exit (1);
