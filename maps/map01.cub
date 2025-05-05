@@ -1,11 +1,12 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-EA /home/path_to_the_south_texture
-WE ./path_to_the_south_texture
+NO assets/north.png
+SO assets/south.png
+WE assets/west.png
+EA assets/east.png
 
 
-C 225,55,0
-F 220,109,210
+
+C 42,42,42
+F 25,109,210
 
 
 

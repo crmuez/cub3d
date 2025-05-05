@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dramos-n <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:49:42 by dramos-n          #+#    #+#             */
-/*   Updated: 2025/04/03 17:49:46 by dramos-n         ###   ########.fr       */
+/*   Updated: 2025/05/05 17:38:58 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void	get_textures(t_map *game)
 	if (game->math->side == 0)
 	{
 		if (game->math->raydir_x > 0)
-			game->texture = game->w_wall;
-		else
 			game->texture = game->e_wall;
+		else
+			game->texture = game->w_wall;
 	}
 	else
 	{

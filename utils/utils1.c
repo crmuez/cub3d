@@ -6,7 +6,7 @@
 /*   By: crmunoz- <crmunoz-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 15:11:35 by crmunoz-          #+#    #+#             */
-/*   Updated: 2025/04/29 20:40:52 by crmunoz-         ###   ########.fr       */
+/*   Updated: 2025/05/05 16:52:56 by crmunoz-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_error(int err)
 	else if (err == '5')
 	{
 		write(2, "Error\nInvalid file\n", 19);
-		exit ;
+		exit (1);
 	}
 	return (-1);
 }
